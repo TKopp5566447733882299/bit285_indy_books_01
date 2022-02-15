@@ -24,6 +24,18 @@ namespace IndyBooks.Data
             //  TODO: Create two additional books in the seed data 
             //         drop and then update the database using ef
             //
+            context.Books.Add(new Book {
+                Title = "Test Book",
+                Author = "Jane Austin",
+                Price = 9.99M,
+                Year = "1813"
+            });
+            context.Books.Add(new Book {
+                Title = "Test Book2",
+                Author = "Your Mom",
+                Price = 4.20M,
+                Year = "2021"
+            });
             context.Books.Add(new Book
             {
                 Title = "Pride and Prejudice",

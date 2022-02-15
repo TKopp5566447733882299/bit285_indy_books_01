@@ -35,12 +35,34 @@ namespace IndyBooks.Controllers
                 
                 results.BookList = results.BookList
                              .Where(b => b.Title.Contains(searchVM.Title) )
+                             .OrderByDescending(b => b.Year)
                              ;
-                // TODO: order the above results by year, starting with the newest
+                // : order the above results by year, starting with the newest
 
 
             }
-
+            if (searchVM.Author != null) 
+            {
+                results.BookList = results.BookList
+                    .Where(b => b.Author.Contains(searchVM.Author))
+                    ;
+            }
+            if (searchVM.MinPrice != 0) 
+            {
+                results.BookList = results.BookList
+                    .Where(b => b.Price > searchVM.MinPrice)
+                    .OrderBy(b => b.Price)
+                    ;
+            }
+            if (searchVM.MaxPrice != 0) {
+                results.BookList = results.BookList
+                    .Where(b => b.Price < searchVM.MaxPrice)
+                    .OrderBy(b => b.Price)
+                    ;
+            }
+            results.BookList = results.BookList
+                .Take(5)
+                ;
             //TODO: Filter the collection by last part of the Author's Name, if given
             // (HINT: Use a string method that matches the end of the string,
             //        also you will need to adjust the Search View and ViewModel to collect Author name)
@@ -51,7 +73,7 @@ namespace IndyBooks.Controllers
             // (Note: you will need to adjust the Search ViewModel and View to add search fields)
 
 
-            
+
             // TODO: only include the first 5 books in the SearchResults view
 
 
